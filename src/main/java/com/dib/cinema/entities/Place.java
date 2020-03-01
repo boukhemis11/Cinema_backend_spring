@@ -1,12 +1,13 @@
-package com.dib.cinema.dao;
+package com.dib.cinema.entities;
+
+import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,15 +15,14 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data @AllArgsConstructor @NoArgsConstructor
-public class Ticket {
+public class Place {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private double prix;
-	private String nomClient;
-	private int codePayment;
-	private boolean reservee;
+	private int nbrPlace;
+	private double longitude,latitude,altitude;
 	@ManyToOne
-	private Place place;
-	@ManyToOne
-	private Projection projection;
+	private Salle salle;
+	@OneToMany(mappedBy = "place")
+	private Collection<Ticket> tickets;
+
 }

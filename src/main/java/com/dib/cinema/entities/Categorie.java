@@ -1,13 +1,13 @@
-package com.dib.cinema.dao;
+package com.dib.cinema.entities;
 
-import java.util.Date;
+import java.util.Collection;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,10 +15,12 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data @AllArgsConstructor @NoArgsConstructor
-public class Seance {
+public class Categorie {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date heureDebut;
-	
+	@Column(length = 70)
+	private String name;
+	@OneToMany(mappedBy = "categorie")
+	private Collection<Film> films;
+
 }

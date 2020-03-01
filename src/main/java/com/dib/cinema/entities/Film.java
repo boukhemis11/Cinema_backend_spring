@@ -1,6 +1,7 @@
-package com.dib.cinema.dao;
+package com.dib.cinema.entities;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,18 +15,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Data @NoArgsConstructor @AllArgsConstructor
-public class Salle {
+@Data @AllArgsConstructor @NoArgsConstructor
+public class Film {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String name;
-	private int nbrPlace;
-	@ManyToOne
-	private Cinema cinema;
-	@OneToMany(mappedBy = "salle")
-	private Collection<Place> places;
-	@OneToMany(mappedBy = "salle")
+	private String titre;
+	private String description;
+	private String realisateur;
+	private Date dateSortie;
+	private double duree;
+	private String photo;
+	@OneToMany(mappedBy = "film")
 	private Collection<Projection> projections;
-
-	
+	@ManyToOne
+	private Categorie categorie;
 }
